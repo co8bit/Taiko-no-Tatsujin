@@ -6,6 +6,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    sound_menu = new Phonon::MediaObject(this);
+    createPath(sound_menu, new Phonon::AudioOutput(Phonon::MusicCategory, this));
+    sound_menu->setCurrentSource(Phonon::MediaSource("/Users/yanzheng//workspace/Taiko-no-Tatsujin/songs/examination.mp3"));
+    sound_menu->setTransitionTime(-270);
+    sound_menu->play();
+
 }
 
 MainWindow::~MainWindow()

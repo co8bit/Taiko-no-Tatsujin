@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <Phonon>
 
 namespace Ui {
 class MainWindow;
@@ -14,12 +15,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
-private:
-    Ui::MainWindow *ui;
 
 private slots:
     void on_exitButton_clicked();
+
+private:
+    Ui::MainWindow *ui;
+
+    Phonon::MediaObject *sound_menu;
 };
 
 #endif // MAINWINDOW_H
