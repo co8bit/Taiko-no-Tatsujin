@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/songs">
+        <file alias="examination.mp3">songs/examination.mp3</file>
+        <file alias="examination.tja">songs/examination.tja</file>
+    </qresource>
+    <qresource prefix="/songs/examination">
+        <file alias="examination.mp3">songs/examination.mp3</file>
+        <file alias="examination.tja">songs/examination.tja</file>
+    </qresource>
+</RCC>

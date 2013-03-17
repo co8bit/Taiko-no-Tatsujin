@@ -19,13 +19,18 @@ public:
     ~MainWindow();
 
 private slots:
+    void menu_sound_finished();
     void on_playButton_clicked();
     void on_exitButton_clicked();
+    void on_songsList_itemDoubleClicked();
 
 private:
     Ui::MainWindow *ui;
+    QTimer *timer;
 
-    void keyPressEvent(QKeyEvent *e);
+    void start_game(QString music_name);
+    void hide_buttons();
+    void show_buttons();
 
     Phonon::MediaObject *sound_menu;
 };
