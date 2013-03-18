@@ -2,6 +2,7 @@
 #include <QKeyEvent>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "midi.h"
 
 QLabel *labelTable[1000];
 
@@ -80,6 +81,19 @@ void MainWindow::on_playButton_clicked()
 void MainWindow::start_game(QString music_name)
 {
     sound_menu->stop();
+
+    QDir dir_music(QDir::home().absoluteFilePath(QString(".tnt/songs/%1/").arg(music_name)));
+
+    music_song = new Phonon::MediaObject(this);
+    music_song->setCurrentSource(Phonon::MediaSource(dir_music.absoluteFilePath("song.mp3")));
+
+    Midi midi(dir_music.absoluteFilePath("notes.tnt").toStdString());
+    midi.parse();
+
+    game = new Game;
+    game->setMidi(midi);
+    game->resize(this->size());
+    game->show();
 }
 
 void MainWindow::on_exitButton_clicked()
@@ -90,5 +104,5 @@ void MainWindow::on_exitButton_clicked()
 void MainWindow::on_songsList_itemDoubleClicked()
 {
     ui->songsList->setVisible(false);
-    //start_game(musiclist->currentItem()->text());
+    start_game(ui->songsList->currentItem()->text());
 }

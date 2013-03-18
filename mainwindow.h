@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QListWidget>
 #include <Phonon>
+#include "game.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,12 +28,14 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
+    Game *game;
 
     void start_game(QString music_name);
     void hide_buttons();
     void show_buttons();
 
     Phonon::MediaObject *sound_menu;
+    Phonon::MediaObject *music_song;
 };
 
 #endif // MAINWINDOW_H

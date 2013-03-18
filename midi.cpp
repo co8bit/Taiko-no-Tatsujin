@@ -1,3 +1,4 @@
+#include <iostream>
 #include "midi.h"
 
 const int infinity = 31415926;

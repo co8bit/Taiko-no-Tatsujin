@@ -16,11 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     midi.cpp \
-    note.cpp
+    note.cpp \
+    game.cpp
 
 HEADERS  += mainwindow.h \
     midi.h \
-    note.h
+    note.h \
+    game.h
 
 FORMS    += mainwindow.ui
 
