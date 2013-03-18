@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <QtGui>
 #include <QWidget>
 #include <QTimer>
 #include <Phonon>
@@ -23,6 +24,9 @@ private slots:
     void update();
 
 private:
+    QLabel *hit_don_left_label;
+    QLabel *hit_don_right_label;
+
     Midi midi;
 
     int combo;

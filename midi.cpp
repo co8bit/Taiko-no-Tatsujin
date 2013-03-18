@@ -12,9 +12,10 @@ void Midi::parse()
 {
     FILE *fin = fopen(address.c_str(), "r");
     fscanf(fin, "BPM=%d\n", &bpm);
-    fscanf(fin, "Division=%d", &division);
+    fscanf(fin, "OFFSET=%lf", &offset);
     printf("BPM: %d\n", bpm);
-    printf("Division: %d\n", division);
+    printf("Offset: %lf\n", offset);
+
     int count = 0;
     while (true)
     {

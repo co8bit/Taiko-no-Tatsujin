@@ -12,7 +12,7 @@ public:
     void parse();
     Note notes[1000];
     int bpm;
-    int division;
+    double offset;
 
 private:
     std::string address;

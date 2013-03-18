@@ -7,6 +7,8 @@
     <qresource prefix="/images">
         <file alias="dong.png">images/dong.png</file>
         <file alias="panel.png">images/panel.png</file>
+        <file alias="hit_don_left.png">images/hit_don_left.png</file>
+        <file alias="hit_don_right.png">images/hit_don_right.png</file>
     </qresource>
     <qresource prefix="/songs/examination">
         <file alias="notes.tnt">songs/examination/notes.tnt</file>
