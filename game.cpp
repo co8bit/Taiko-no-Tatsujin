@@ -20,16 +20,30 @@ Game::Game(QWidget *parent) :
     QPixmap hit_don_left_pic(":/images/hit_don_left.png");
     hit_don_left_label = new QLabel(this);
     hit_don_left_label->setPixmap(hit_don_left_pic);
-    hit_don_left_label->setGeometry(0, 153, 153, 178);
+    hit_don_left_label->setGeometry(0, 150, 153, 178);
     hit_don_left_label->show();
     hit_don_left_label->setVisible(false);
 
     QPixmap hit_don_right_pic(":/images/hit_don_right.png");
     hit_don_right_label = new QLabel(this);
     hit_don_right_label->setPixmap(hit_don_right_pic);
-    hit_don_right_label->setGeometry(0, 153, 153, 178);
+    hit_don_right_label->setGeometry(0, 150, 153, 178);
     hit_don_right_label->show();
     hit_don_right_label->setVisible(false);
+
+    QPixmap hit_katsu_left_pic(":/images/hit_katsu_left.png");
+    hit_katsu_left_label = new QLabel(this);
+    hit_katsu_left_label->setPixmap(hit_katsu_left_pic);
+    hit_katsu_left_label->setGeometry(0, 138, 153, 178);
+    hit_katsu_left_label->show();
+    hit_katsu_left_label->setVisible(false);
+
+    QPixmap hit_katsu_right_pic(":/images/hit_katsu_right.png");
+    hit_katsu_right_label = new QLabel(this);
+    hit_katsu_right_label->setPixmap(hit_katsu_right_pic);
+    hit_katsu_right_label->setGeometry(0, 138, 153, 178);
+    hit_katsu_right_label->show();
+    hit_katsu_right_label->setVisible(false);
 
     QPixmap dong(":/images/dong.png");
     for (int i = 0; i < 100; i++)
@@ -99,10 +113,12 @@ void Game::keyPressEvent(QKeyEvent *event)
         if (event->key() == Qt::Key_G)
         {
             hit_don_left_label->setVisible(true);
+            QTimer::singleShot(200, this, SLOT(hideDonLeft()));
         }
         else
         {
             hit_don_right_label->setVisible(true);
+            QTimer::singleShot(200, this, SLOT(hideDonRight()));
         }
     }
     else if (event->key() == Qt::Key_F or event->key() == Qt::Key_J)
@@ -111,5 +127,36 @@ void Game::keyPressEvent(QKeyEvent *event)
         katsu_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_katsu.m4a"));
         katsu_sound->play();
         phononCounter %= 100;
+        if (event->key() == Qt::Key_F)
+        {
+            hit_katsu_left_label->setVisible(true);
+            QTimer::singleShot(200, this, SLOT(hideKatsuLeft()));
+        }
+        else
+        {
+            hit_katsu_right_label->setVisible(true);
+            QTimer::singleShot(200, this, SLOT(hideKatsuRight()));
+        }
     }
 }
+
+void Game::hideDonLeft()
+{
+    hit_don_left_label->setVisible(false);
+}
+
+void Game::hideDonRight()
+{
+    hit_don_right_label->setVisible(false);
+}
+
+void Game::hideKatsuLeft()
+{
+    hit_katsu_left_label->setVisible(false);
+}
+
+void Game::hideKatsuRight()
+{
+    hit_katsu_right_label->setVisible(false);
+}
+

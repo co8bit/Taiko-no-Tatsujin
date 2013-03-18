@@ -22,10 +22,16 @@ signals:
     
 private slots:
     void update();
+    void hideDonLeft();
+    void hideDonRight();
+    void hideKatsuLeft();
+    void hideKatsuRight();
 
 private:
     QLabel *hit_don_left_label;
     QLabel *hit_don_right_label;
+    QLabel *hit_katsu_left_label;
+    QLabel *hit_katsu_right_label;
 
     Midi midi;
 
