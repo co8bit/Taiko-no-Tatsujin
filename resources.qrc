@@ -1,10 +1,15 @@
 <RCC>
-    <qresource prefix="/songs">
-        <file alias="examination.mp3">songs/examination.mp3</file>
-        <file alias="examination.tja">songs/examination.tja</file>
+    <qresource prefix="/sounds">
+        <file alias="don008.m4a">sounds/don008.m4a</file>
+        <file alias="com_don.m4a">sounds/com_don.m4a</file>
+        <file alias="com_katsu.m4a">sounds/com_katsu.m4a</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="dong.png">images/dong.png</file>
+        <file alias="panel.png">images/panel.png</file>
     </qresource>
     <qresource prefix="/songs/examination">
-        <file alias="examination.mp3">songs/examination.mp3</file>
-        <file alias="examination.tja">songs/examination.tja</file>
+        <file alias="notes.tnt">songs/examination/notes.tnt</file>
+        <file alias="song.mp3">songs/examination/song.mp3</file>
     </qresource>
 </RCC>
