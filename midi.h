@@ -2,20 +2,24 @@
 #define MIDI_H
 
 #include <iostream>
+#include <string>
+#include <QFile>
+#include <QTextStream>
 #include "note.h"
 
 class Midi
 {
 
 public:
-    Midi(std::string address);
-    void parse();
-    Note notes[1000];
-    int bpm;
-    double offset;
+    Midi(QString address);
+    Note notes[10000];
+    int offset;
 
 private:
-    std::string address;
+    QString address;
+    QFile *file;
+    QTextStream *in;
+
 };
 
 #endif // MIDI_H

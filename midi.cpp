@@ -1,30 +1,43 @@
 #include <iostream>
+#include <QString>
+#include <QFile>
+#include <QDebug>
 #include "midi.h"
+using namespace std;
 
 const int infinity = 31415926;
 
-Midi::Midi(std::string address) : address(address)
-{
-    ;
-}
+/*
+ *
+ *      type    start_time      speed
+ *
+ *
+ */
 
-void Midi::parse()
+Midi::Midi(QString address) : address(address)
 {
-    FILE *fin = fopen(address.c_str(), "r");
-    fscanf(fin, "BPM=%d\n", &bpm);
-    fscanf(fin, "OFFSET=%lf", &offset);
-    printf("BPM: %d\n", bpm);
-    printf("Offset: %lf\n", offset);
+    file = new QFile(address);
+    file->open(QIODevice::ReadOnly | QIODevice::Text);
+    in = new QTextStream(file);
+
+    QString line = "";
+
+    line = in->readLine();
+    sscanf(line.toAscii(), "Offset: %d", &offset);
 
     int count = 0;
-    while (true)
+    while ( 1 )
     {
-        fscanf(fin, "%d,%d,%d", &(notes[count].key), &(notes[count].start), &(notes[count].end));
-        if (notes[count].key == 0)
-        {
-            notes[count].start = notes[count].end = infinity;
+        line = in->readLine();
+        if (line.isEmpty())
             break;
-        }
-        ++count;
+        int type;
+        int time;
+        int speed;
+        sscanf(line.toAscii(), "%d %d %d", &type, &time, &speed);
+        notes[count].key = type;
+        notes[count].start_time = time;
+        notes[count].speed = speed;
+        count += 1;
     }
 }

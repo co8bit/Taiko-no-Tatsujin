@@ -79,14 +79,13 @@ void MainWindow::start_game(QString music_name)
     Phonon::MediaObject *bg_music = new Phonon::MediaObject(this);
     createPath(bg_music, new Phonon::AudioOutput(Phonon::MusicCategory, this));
     bg_music->setCurrentSource(Phonon::MediaSource(song_path));
-    bg_music->play();
 
-//    QString midi_path = ":/songs/" + music_name + "/notes.tnt";
-//    Midi midi(midi_path.toStdString());
-//    midi.parse();
+    QString midi_path = ":/songs/" + music_name + "/notes.tnt";
+    Midi midi(midi_path);
 
     game = new Game(this);
-    //game->setMidi(midi);
+    game->setMidi(midi);
+    game->setBgMusic(bg_music);
     game->resize(this->size());
     game->show();
 }
@@ -99,6 +98,5 @@ void MainWindow::on_exitButton_clicked()
 void MainWindow::on_songsList_itemDoubleClicked()
 {
     ui->songsList->setVisible(false);
-    qDebug(ui->songsList->currentItem()->text().toAscii());
     start_game(ui->songsList->currentItem()->text());
 }

@@ -7,13 +7,9 @@ class Note
 public:
     Note();
     int key;
-    int start;
-    int end;
-    bool pressed();
-    void setPressed(bool);
+    int start_time;
+    double speed;
 
-private:
-    bool _pressed;
 };
 
 #endif // NOTE_H
