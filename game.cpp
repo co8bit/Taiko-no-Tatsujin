@@ -113,15 +113,15 @@ void Game::update()
     {
         QLabel *label = labelTable[ current_label % 100 ];
 
-        if (midi.notes[current_note].key == 0)
+        if (midi.notes[current_note].key == 1)
         {
-            qDebug() << "pong";
             QPixmap dong(":/images/dong.png");
             label->setPixmap(dong);
         }
-        else
+        else if (midi.notes[current_note].key == 2)
         {
-            // label->setPixmap(katsu);
+            QPixmap katsu(":/images/katsu.png");
+            label->setPixmap(katsu);
         }
 
         label->setGeometry(700, 175, 80, 80);
@@ -136,7 +136,7 @@ void Game::update()
         if (label->isVisible())
         {
             QRect geom = labelTable[i]->geometry();
-            if (geom.x() < 50)
+            if (geom.x() < 90)
             {
                 label->setVisible(false);
                 combo = 0;
@@ -209,7 +209,17 @@ void Game::keyPressEvent(QKeyEvent *event)
             if (geom.x() > 100 && geom.x() < 180)
             {
                 label->setVisible(false);
-                score += 100;
+
+                int x = geom.x();
+                if (x > 120 && x < 170)
+                {
+                    score += 100;
+                }
+                else
+                {
+                    score += 70;
+                }
+
                 combo += 1;
 
                 if (combo == 50)
@@ -223,12 +233,14 @@ void Game::keyPressEvent(QKeyEvent *event)
                     Phonon::MediaObject *combo_100 = phononTable[phononCounter++];
                     combo_100->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo100pst.m4a"));
                     combo_100->play();
+                    phononCounter %= 100;
                 }
                 else if (combo == 200)
                 {
                     Phonon::MediaObject *combo_200 = phononTable[phononCounter++];
                     combo_200->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo200pst.m4a"));
                     combo_200->play();
+                    phononCounter %= 100;
                 }
             }
             geom.adjust(-2, 0, -2, 0);
