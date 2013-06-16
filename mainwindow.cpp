@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->verticalLayout->setAlignment(Qt::AlignCenter);
 
+    ui->frame->setFrameStyle(QFrame::StyledPanel);
+    ui->frame->setStyleSheet("background-image: url(:/images/background.jpg)");
+
     setStyleSheet(QString("QPushButton { font-family: 'Avenir Next'; font-size: 40px; font-weight: bold; }"));
 
     sound_menu = new Phonon::MediaObject(this);

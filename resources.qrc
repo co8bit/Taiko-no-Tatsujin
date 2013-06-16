@@ -15,6 +15,7 @@
         <file alias="hit_katsu_left.png">images/hit_katsu_left.png</file>
         <file alias="hit_katsu_right.png">images/hit_katsu_right.png</file>
         <file alias="katsu.png">images/katsu.png</file>
+        <file alias="background.jpg">images/background.jpg</file>
     </qresource>
     <qresource prefix="/songs/examination">
         <file alias="notes.tnt">songs/examination/notes.tnt</file>
