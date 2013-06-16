@@ -10,12 +10,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QSpacerItem *spacer = new QSpacerItem(0, -200);
+    ui->verticalLayout->addItem(spacer);
     ui->verticalLayout->setAlignment(Qt::AlignCenter);
 
-    ui->frame->setFrameStyle(QFrame::StyledPanel);
-    ui->frame->setStyleSheet("background-image: url(:/images/background.jpg)");
-
-    setStyleSheet(QString("QPushButton { font-family: 'Avenir Next'; font-size: 40px; font-weight: bold; }"));
+    setStyleSheet(QString("QMainWindow { background-image: url(:/images/title.png); } QPushButton { font-family: 'AvenirNext-Regular'; font-size: 40px; font-weight: bold; };"));
 
     sound_menu = new Phonon::MediaObject(this);
     createPath(sound_menu, new Phonon::AudioOutput(Phonon::MusicCategory, this));
@@ -85,6 +85,8 @@ void MainWindow::start_game(QString music_name)
 
     QString midi_path = ":/songs/" + music_name + "/notes.tnt";
     Midi midi(midi_path);
+
+    setStyleSheet(QString("QMainWindow { background-image: url(:/images/background.jpg); } QPushButton { font-family: 'AvenirNext-Regular'; font-size: 40px; font-weight: bold; };"));
 
     game = new Game(this);
     game->setMidi(midi);

@@ -8,6 +8,7 @@ Phonon::MediaObject *phononTable[100];
 int phononCounter = 0;
 QLabel *scoreLabel;
 QLabel *comboLabel;
+QLabel *mobLabel = NULL;
 
 Game::Game(QWidget *parent) :
     QWidget(parent),
@@ -70,7 +71,6 @@ Game::Game(QWidget *parent) :
     comboLabel->setStyleSheet("* {font-size: 32px;}");
     comboLabel->show();
 
-
     pressing_don = false;
     pressing_katsu = false;
 
@@ -109,6 +109,15 @@ void Game::update()
         bg_music->play();
     }
 
+    if (score > 3000 && mobLabel == NULL)
+    {
+        QPixmap mob(":/images/mob.png");
+        mobLabel = new QLabel(this);
+        mobLabel->setPixmap(mob);
+        mobLabel->setGeometry(0, 210, 800, 479);
+        mobLabel->show();
+    }
+
     if (midi.notes[current_note].start_time == update_counter)
     {
         QLabel *label = labelTable[ current_label % 100 ];
@@ -139,6 +148,15 @@ void Game::update()
             if (geom.x() < 90)
             {
                 label->setVisible(false);
+
+                if (combo != 0)
+                {
+                    Phonon::MediaObject *combo_break = phononTable[phononCounter++];
+                    combo_break->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combobreak_pst.m4a"));
+                    combo_break->play();
+                    phononCounter %= 100;
+                }
+
                 combo = 0;
             }
             geom.adjust(-4, 0, -4, 0);

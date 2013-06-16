@@ -6,6 +6,7 @@
         <file alias="tkds_combo050pst.m4a">sounds/tkds_combo050pst.m4a</file>
         <file alias="tkds_combo100pst.m4a">sounds/tkds_combo100pst.m4a</file>
         <file alias="tkds_combo200pst.m4a">sounds/tkds_combo200pst.m4a</file>
+        <file alias="tkds_combobreak_pst.m4a">sounds/tkds_combobreak_pst.m4a</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="dong.png">images/dong.png</file>
@@ -16,6 +17,8 @@
         <file alias="hit_katsu_right.png">images/hit_katsu_right.png</file>
         <file alias="katsu.png">images/katsu.png</file>
         <file alias="background.jpg">images/background.jpg</file>
+        <file alias="mob.png">images/mob.png</file>
+        <file alias="title.png">images/title.png</file>
     </qresource>
     <qresource prefix="/songs/examination">
         <file alias="notes.tnt">songs/examination/notes.tnt</file>
