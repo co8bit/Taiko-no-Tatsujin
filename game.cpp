@@ -182,7 +182,7 @@ void Game::setMidi(Midi new_midi)
 
 void Game::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_G or event->key() == Qt::Key_H)
+    if (event->key() == Qt::Key_G || event->key() == Qt::Key_H)
     {
         Phonon::MediaObject *don_sound = phononTable[phononCounter++];
         don_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_don.m4a"));
@@ -200,7 +200,7 @@ void Game::keyPressEvent(QKeyEvent *event)
         }
         // qDebug() << "1 " << update_counter << " 0";
     }
-    else if (event->key() == Qt::Key_F or event->key() == Qt::Key_J)
+    else if (event->key() == Qt::Key_F || event->key() == Qt::Key_J)
     {
         Phonon::MediaObject *katsu_sound = phononTable[phononCounter++];
         katsu_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_katsu.m4a"));

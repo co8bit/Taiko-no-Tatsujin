@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setStyleSheet(QString("QMainWindow { background-image: url(:/images/title.png); } QPushButton { font-family: 'AvenirNext-Regular'; font-size: 40px; font-weight: bold; };"));
 
     sound_menu = new Phonon::MediaObject(this);
-    createPath(sound_menu, new Phonon::AudioOutput(Phonon::MusicCategory, this));
+    Phonon::createPath(sound_menu, new Phonon::AudioOutput(Phonon::MusicCategory, this));
     sound_menu->setCurrentSource(Phonon::MediaSource(":/sounds/don008.m4a"));
     QObject::connect(sound_menu, SIGNAL(aboutToFinish()), SLOT(menu_sound_finished()));
     sound_menu->setTransitionTime(-270);
@@ -80,7 +80,7 @@ void MainWindow::start_game(QString music_name)
 
     QString song_path = ":/songs/" + music_name + "/song.mp3";
     Phonon::MediaObject *bg_music = new Phonon::MediaObject(this);
-    createPath(bg_music, new Phonon::AudioOutput(Phonon::MusicCategory, this));
+    Phonon::createPath(bg_music, new Phonon::AudioOutput(Phonon::MusicCategory, this));
     bg_music->setCurrentSource(Phonon::MediaSource(song_path));
 
     QString midi_path = ":/songs/" + music_name + "/notes.tnt";
