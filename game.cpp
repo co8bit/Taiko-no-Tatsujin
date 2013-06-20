@@ -4,6 +4,7 @@
 #include "game.h"
 
 QLabel *labelTable[100];
+int labelType[100];
 Phonon::MediaObject *phononTable[100];
 int phononCounter = 0;
 QLabel *scoreLabel;
@@ -47,6 +48,20 @@ Game::Game(QWidget *parent) :
     hit_katsu_right_label->setGeometry(0, 138, 153, 178);
     hit_katsu_right_label->show();
     hit_katsu_right_label->setVisible(false);
+
+    QPixmap dongOkPic(":/images/dongOk.png");
+    dongOkLabel = new QLabel(this);
+    dongOkLabel->setPixmap(dongOkPic);
+    dongOkLabel->setGeometry(0, 200, 102, 100);
+    dongOkLabel->show();
+    dongOkLabel->setVisible(false);
+
+    QPixmap katsuOkPic(":/images/katsuOk.png");
+    katsuOkLabel = new QLabel(this);
+    katsuOkLabel->setPixmap(katsuOkPic);
+    katsuOkLabel->setGeometry(0, 200, 100, 97);
+    katsuOkLabel->show();
+    katsuOkLabel->setVisible(false);
 
     QPixmap dong(":/images/dong.png");
     for (int i = 0; i < 100; i++)
@@ -118,7 +133,7 @@ void Game::update()
         mobLabel->show();
     }
 
-    if (midi.notes[current_note].start_time == update_counter)
+    if (midi.notes[current_note].start_time == update_counter)//add new label
     {
         QLabel *label = labelTable[ current_label % 100 ];
 
@@ -132,6 +147,7 @@ void Game::update()
             QPixmap katsu(":/images/katsu.png");
             label->setPixmap(katsu);
         }
+        labelType[current_label % 100] = midi.notes[current_note].key;
 
         label->setGeometry(700, 175, 80, 80);
         label->setVisible(true);
@@ -139,13 +155,13 @@ void Game::update()
         current_note += 1;
     }
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 100; i++)//delete label
     {
         QLabel *label = labelTable[i];
         if (label->isVisible())
         {
             QRect geom = labelTable[i]->geometry();
-            if (geom.x() < 90)
+            if (geom.x() < 20)
             {
                 label->setVisible(false);
 
@@ -182,7 +198,7 @@ void Game::setMidi(Midi new_midi)
 
 void Game::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_G || event->key() == Qt::Key_H)
+    if ((event->key() == Qt::Key_G) || (event->key() == Qt::Key_H))
     {
         Phonon::MediaObject *don_sound = phononTable[phononCounter++];
         don_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_don.m4a"));
@@ -199,8 +215,55 @@ void Game::keyPressEvent(QKeyEvent *event)
             QTimer::singleShot(200, this, SLOT(hideDonRight()));
         }
         // qDebug() << "1 " << update_counter << " 0";
+        for (int i = 0; i < 100; i++)
+        {
+            QLabel *label = labelTable[i];
+            if (label->isVisible())
+            {
+                QRect geom = labelTable[i]->geometry();
+                if (geom.x() > 100 && geom.x() < 180 && (labelType[i] == 1))//击中对应的类型，则算分，否则让他飘过去
+                {
+                    label->setVisible(false);
+                    dongOkLabel->setVisible(true);
+
+                    int x = geom.x();
+                    if (x > 120 && x < 170)
+                    {
+                        score += 100;
+                    }
+                    else
+                    {
+                        score += 70;
+                    }
+
+                    combo += 1;
+
+                    if (combo == 50)
+                    {
+                        Phonon::MediaObject *combo_50 = phononTable[phononCounter++];
+                        combo_50->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo050pst.m4a"));
+                        combo_50->play();
+                    }
+                    else if (combo == 100)
+                    {
+                        Phonon::MediaObject *combo_100 = phononTable[phononCounter++];
+                        combo_100->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo100pst.m4a"));
+                        combo_100->play();
+                        phononCounter %= 100;
+                    }
+                    else if (combo == 200)
+                    {
+                        Phonon::MediaObject *combo_200 = phononTable[phononCounter++];
+                        combo_200->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo200pst.m4a"));
+                        combo_200->play();
+                        phononCounter %= 100;
+                    }
+                }
+            }
+        }
     }
-    else if (event->key() == Qt::Key_F || event->key() == Qt::Key_J)
+    else
+    if ((event->key() == Qt::Key_F) || (event->key() == Qt::Key_J))
     {
         Phonon::MediaObject *katsu_sound = phononTable[phononCounter++];
         katsu_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_katsu.m4a"));
@@ -216,55 +279,55 @@ void Game::keyPressEvent(QKeyEvent *event)
             hit_katsu_right_label->setVisible(true);
             QTimer::singleShot(200, this, SLOT(hideKatsuRight()));
         }
-    }
-
-    for (int i = 0; i < 100; i++)
-    {
-        QLabel *label = labelTable[i];
-        if (label->isVisible())
+        for (int i = 0; i < 100; i++)
         {
-            QRect geom = labelTable[i]->geometry();
-            if (geom.x() > 100 && geom.x() < 180)
+            QLabel *label = labelTable[i];
+            if (label->isVisible())
             {
-                label->setVisible(false);
+                QRect geom = labelTable[i]->geometry();
+                if (geom.x() > 100 && geom.x() < 180 && (labelType[i] == 2))//击中对应的类型，则算分，否则让他飘过去
+                {
+                    label->setVisible(false);
+                    katsuOkLabel->setVisible(true);
 
-                int x = geom.x();
-                if (x > 120 && x < 170)
-                {
-                    score += 100;
-                }
-                else
-                {
-                    score += 70;
-                }
+                    int x = geom.x();
+                    if (x > 120 && x < 170)
+                    {
+                        score += 100;
+                    }
+                    else
+                    {
+                        score += 70;
+                    }
 
-                combo += 1;
+                    combo += 1;
 
-                if (combo == 50)
-                {
-                    Phonon::MediaObject *combo_50 = phononTable[phononCounter++];
-                    combo_50->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo050pst.m4a"));
-                    combo_50->play();
-                }
-                else if (combo == 100)
-                {
-                    Phonon::MediaObject *combo_100 = phononTable[phononCounter++];
-                    combo_100->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo100pst.m4a"));
-                    combo_100->play();
-                    phononCounter %= 100;
-                }
-                else if (combo == 200)
-                {
-                    Phonon::MediaObject *combo_200 = phononTable[phononCounter++];
-                    combo_200->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo200pst.m4a"));
-                    combo_200->play();
-                    phononCounter %= 100;
+                    if (combo == 50)
+                    {
+                        Phonon::MediaObject *combo_50 = phononTable[phononCounter++];
+                        combo_50->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo050pst.m4a"));
+                        combo_50->play();
+                    }
+                    else if (combo == 100)
+                    {
+                        Phonon::MediaObject *combo_100 = phononTable[phononCounter++];
+                        combo_100->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo100pst.m4a"));
+                        combo_100->play();
+                        phononCounter %= 100;
+                    }
+                    else if (combo == 200)
+                    {
+                        Phonon::MediaObject *combo_200 = phononTable[phononCounter++];
+                        combo_200->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_combo200pst.m4a"));
+                        combo_200->play();
+                        phononCounter %= 100;
+                    }
                 }
             }
-            geom.adjust(-2, 0, -2, 0);
-            labelTable[i]->setGeometry(geom);
         }
     }
+
+
 }
 
 void Game::hideDonLeft()

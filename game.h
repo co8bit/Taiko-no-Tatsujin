@@ -33,6 +33,8 @@ private:
     QLabel *hit_don_right_label;
     QLabel *hit_katsu_left_label;
     QLabel *hit_katsu_right_label;
+    QLabel *dongOkLabel;
+    QLabel *katsuOkLabel;
 
     Phonon::MediaObject *bg_music;
 
