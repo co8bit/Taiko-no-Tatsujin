@@ -19,8 +19,8 @@
         <file alias="background.jpg">images/background.jpg</file>
         <file alias="mob.png">images/mob.png</file>
         <file alias="title.png">images/title.png</file>
-        <file>images/dongOk.png</file>
-        <file>images/katsuOk.png</file>
+        <file alias="dongOk.png">images/dongOk.png</file>
+        <file alias="KatsuOk.png">images/katsuOk.png</file>
     </qresource>
     <qresource prefix="/songs/examination">
         <file alias="notes.tnt">songs/examination/notes.tnt</file>
