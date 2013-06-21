@@ -52,14 +52,14 @@ Game::Game(QWidget *parent) :
     QPixmap dongOkPic(":/images/dongOk.png");
     dongOkLabel = new QLabel(this);
     dongOkLabel->setPixmap(dongOkPic);
-    dongOkLabel->setGeometry(0, 200, 102, 100);
+    dongOkLabel->setGeometry(85, 120, 204, 191);
     dongOkLabel->show();
     dongOkLabel->setVisible(false);
 
     QPixmap katsuOkPic(":/images/katsuOk.png");
     katsuOkLabel = new QLabel(this);
     katsuOkLabel->setPixmap(katsuOkPic);
-    katsuOkLabel->setGeometry(0, 200, 100, 97);
+    katsuOkLabel->setGeometry(90, 120, 204, 191);
     katsuOkLabel->show();
     katsuOkLabel->setVisible(false);
 
@@ -225,7 +225,7 @@ void Game::keyPressEvent(QKeyEvent *event)
                 {
                     label->setVisible(false);
                     dongOkLabel->setVisible(true);
-
+                    QTimer::singleShot(200, this, SLOT(hideDongOrKatsuOk()));
                     int x = geom.x();
                     if (x > 120 && x < 170)
                     {
@@ -289,6 +289,7 @@ void Game::keyPressEvent(QKeyEvent *event)
                 {
                     label->setVisible(false);
                     katsuOkLabel->setVisible(true);
+                    QTimer::singleShot(200, this, SLOT(hideDongOrKatsuOk()));
 
                     int x = geom.x();
                     if (x > 120 && x < 170)
@@ -348,5 +349,11 @@ void Game::hideKatsuLeft()
 void Game::hideKatsuRight()
 {
     hit_katsu_right_label->setVisible(false);
+}
+
+void Game::hideDongOrKatsuOk()
+{
+    dongOkLabel->setVisible(false);
+    katsuOkLabel->setVisible(false);
 }
 

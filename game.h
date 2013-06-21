@@ -27,6 +27,7 @@ private slots:
     void hideDonRight();
     void hideKatsuLeft();
     void hideKatsuRight();
+    void hideDongOrKatsuOk();
 
 private:
     QLabel *hit_don_left_label;
