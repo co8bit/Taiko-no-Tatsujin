@@ -21,6 +21,7 @@
         <file alias="title.png">images/title.png</file>
         <file alias="dongOk.png">images/dongOk.png</file>
         <file alias="katsuOk.png">images/katsuOk.png</file>
+        <file alias="scorePic.png">images/scorePic.png</file>
     </qresource>
     <qresource prefix="/songs/examination">
         <file alias="notes.tnt">songs/examination/notes.tnt</file>

@@ -36,6 +36,7 @@ private:
     QLabel *hit_katsu_right_label;
     QLabel *dongOkLabel;
     QLabel *katsuOkLabel;
+    QLabel *scorePicLabel;
 
     Phonon::MediaObject *bg_music;
 

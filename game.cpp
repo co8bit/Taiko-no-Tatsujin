@@ -63,6 +63,13 @@ Game::Game(QWidget *parent) :
     katsuOkLabel->show();
     katsuOkLabel->setVisible(false);
 
+    QPixmap scorePic(":/images/scorePic.png");
+    scorePicLabel = new QLabel(this);
+    scorePicLabel->setPixmap(scorePic);
+    scorePicLabel->setGeometry(-100, -20, 485, 240);
+    scorePicLabel->show();
+    scorePicLabel->setVisible(false);
+
     QPixmap dong(":/images/dong.png");
     for (int i = 0; i < 100; i++)
     {
@@ -225,6 +232,8 @@ void Game::keyPressEvent(QKeyEvent *event)
                 {
                     label->setVisible(false);
                     dongOkLabel->setVisible(true);
+                    scorePicLabel->setVisible(true);
+
                     QTimer::singleShot(200, this, SLOT(hideDongOrKatsuOk()));
                     int x = geom.x();
                     if (x > 120 && x < 170)
@@ -289,8 +298,9 @@ void Game::keyPressEvent(QKeyEvent *event)
                 {
                     label->setVisible(false);
                     katsuOkLabel->setVisible(true);
-                    QTimer::singleShot(200, this, SLOT(hideDongOrKatsuOk()));
+                    scorePicLabel->setVisible(true);
 
+                    QTimer::singleShot(200, this, SLOT(hideDongOrKatsuOk()));
                     int x = geom.x();
                     if (x > 120 && x < 170)
                     {
@@ -355,5 +365,6 @@ void Game::hideDongOrKatsuOk()
 {
     dongOkLabel->setVisible(false);
     katsuOkLabel->setVisible(false);
+    scorePicLabel->setVisible(false);
 }
 
