@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->songsList->setVisible(false);
     ui->songsList->setStyleSheet(QString("font-family: 'Avenir Next'; font-size: 40px; font-weight: bold;"));
 
+    bg_music = NULL;
+
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
     timer->setInterval(200);
