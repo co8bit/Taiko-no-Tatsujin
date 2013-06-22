@@ -42,11 +42,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::update()
 {
-    if (bg_music != NULL && bg_music->state() == Phonon::PausedState)
+    if (bg_music != NULL)
     {
-        setStyleSheet(QString("QMainWindow { background-image: url(:/images/title.png); } QPushButton { font-family: 'AvenirNext-Regular'; font-size: 40px; font-weight: bold; };"));
-        show_buttons();
-        bg_music = NULL;
+        if (bg_music->state() == Phonon::PausedState)
+        {
+            setStyleSheet(QString("QMainWindow { background-image: url(:/images/title.png); } QPushButton { font-family: 'AvenirNext-Regular'; font-size: 40px; font-weight: bold; };"));
+            show_buttons();
+            bg_music = NULL;
+        }
     }
 }
 
