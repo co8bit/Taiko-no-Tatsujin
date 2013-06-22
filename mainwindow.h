@@ -20,6 +20,7 @@ public:
     ~MainWindow();
 
 private slots:
+    void update();
     void menu_sound_finished();
     void on_playButton_clicked();
     void on_exitButton_clicked();
@@ -36,6 +37,7 @@ private:
 
     Phonon::MediaObject *sound_menu;
     Phonon::MediaObject *music_song;
+    Phonon::MediaObject *bg_music;
 };
 
 #endif // MAINWINDOW_H

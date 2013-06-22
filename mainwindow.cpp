@@ -26,11 +26,28 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->songsList->setVisible(false);
     ui->songsList->setStyleSheet(QString("font-family: 'Avenir Next'; font-size: 40px; font-weight: bold;"));
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->setInterval(200);
+    timer->start();
+
+    setFocus();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::update()
+{
+    if (bg_music != NULL && bg_music->state() == Phonon::PausedState)
+    {
+        setStyleSheet(QString("QMainWindow { background-image: url(:/images/title.png); } QPushButton { font-family: 'AvenirNext-Regular'; font-size: 40px; font-weight: bold; };"));
+        show_buttons();
+        bg_music = NULL;
+    }
 }
 
 void MainWindow::menu_sound_finished()
@@ -79,7 +96,7 @@ void MainWindow::start_game(QString music_name)
     sound_menu->stop();
 
     QString song_path = ":/songs/" + music_name + "/song.mp3";
-    Phonon::MediaObject *bg_music = new Phonon::MediaObject(this);
+    bg_music = new Phonon::MediaObject(this);
     Phonon::createPath(bg_music, new Phonon::AudioOutput(Phonon::MusicCategory, this));
     bg_music->setCurrentSource(Phonon::MediaSource(song_path));
 

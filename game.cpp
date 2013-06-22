@@ -63,7 +63,7 @@ Game::Game(QWidget *parent) :
     katsuOkLabel->show();
     katsuOkLabel->setVisible(false);
 
-    QPixmap scorePic(":/images/scorePic.png");
+    QPixmap scorePic(":/images/~scorePic.png");
     scorePicLabel = new QLabel(this);
     scorePicLabel->setPixmap(scorePic);
     scorePicLabel->setGeometry(-100, -20, 485, 240);
@@ -126,13 +126,23 @@ Game::Game(QWidget *parent) :
 
 void Game::update()
 {
-    if (bg_music->state() != Phonon::PlayingState && update_counter > midi.offset)
+    if (bg_music->state() == Phonon::StoppedState)
     {
-        bg_music->play();
+        if (update_counter > midi.offset)
+            bg_music->play();
+    }
+    else if (bg_music->state() == Phonon::PausedState)
+    {
+        this->hide();
     }
 
     if (score > 3000 && mobLabel == NULL)
     {
+        Phonon::MediaObject *cheer = phononTable[phononCounter++];
+        cheer->setCurrentSource(Phonon::MediaSource(":/sounds/tkds_don002pst.m4a"));
+        cheer->play();
+        phononCounter %= 100;
+
         QPixmap mob(":/images/mob.png");
         mobLabel = new QLabel(this);
         mobLabel->setPixmap(mob);
@@ -337,7 +347,6 @@ void Game::keyPressEvent(QKeyEvent *event)
             }
         }
     }
-
 
 }
 

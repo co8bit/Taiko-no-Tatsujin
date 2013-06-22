@@ -7,6 +7,7 @@
         <file alias="tkds_combo100pst.m4a">sounds/tkds_combo100pst.m4a</file>
         <file alias="tkds_combo200pst.m4a">sounds/tkds_combo200pst.m4a</file>
         <file alias="tkds_combobreak_pst.m4a">sounds/tkds_combobreak_pst.m4a</file>
+        <file alias="tkds_don002pst.m4a">sounds/tkds_don002pst.m4a</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="dong.png">images/dong.png</file>
