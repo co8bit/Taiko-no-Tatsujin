@@ -133,6 +133,7 @@ void Game::update()
     }
     else if (bg_music->state() == Phonon::PausedState)
     {
+        timer->stop();
         this->hide();
     }
 
