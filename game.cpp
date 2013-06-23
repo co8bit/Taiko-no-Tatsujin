@@ -217,6 +217,8 @@ void Game::keyPressEvent(QKeyEvent *event)
 {
     if ((event->key() == Qt::Key_G) || (event->key() == Qt::Key_H))
     {
+        qDebug() << "1 " << update_counter << " 0";
+
         Phonon::MediaObject *don_sound = phononTable[phononCounter++];
         don_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_don.m4a"));
         don_sound->play();
@@ -231,7 +233,7 @@ void Game::keyPressEvent(QKeyEvent *event)
             hit_don_right_label->setVisible(true);
             QTimer::singleShot(200, this, SLOT(hideDonRight()));
         }
-        // qDebug() << "1 " << update_counter << " 0";
+
         for (int i = 0; i < 100; i++)
         {
             QLabel *label = labelTable[i];
@@ -284,6 +286,8 @@ void Game::keyPressEvent(QKeyEvent *event)
     else
     if ((event->key() == Qt::Key_F) || (event->key() == Qt::Key_J))
     {
+        qDebug() << "2 " << update_counter << " 0";
+
         Phonon::MediaObject *katsu_sound = phononTable[phononCounter++];
         katsu_sound->setCurrentSource(Phonon::MediaSource(":/sounds/com_katsu.m4a"));
         katsu_sound->play();

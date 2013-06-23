@@ -24,12 +24,12 @@
         <file alias="katsuOk.png">images/katsuOk.png</file>
         <file alias="scorePic.png">images/scorePic.png</file>
     </qresource>
-    <qresource prefix="/songs/examination">
-        <file alias="notes.tnt">songs/examination/notes.tnt</file>
-        <file alias="song.mp3">songs/examination/song.mp3</file>
-    </qresource>
     <qresource prefix="/songs/QingZhou">
         <file alias="notes.tnt">songs/QingZhou/notes.tnt</file>
         <file alias="song.mp3">songs/QingZhou/song.mp3</file>
+    </qresource>
+    <qresource prefix="/songs/Examination">
+        <file alias="notes.tnt">songs/Examination/notes.tnt</file>
+        <file alias="song.mp3">songs/Examination/song.mp3</file>
     </qresource>
 </RCC>
